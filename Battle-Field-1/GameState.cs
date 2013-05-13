@@ -57,8 +57,8 @@ namespace BattleField
                 case 5: Explosion.HitFive(x, y, rows, cols, workField); break;
             }
 
-            Renderer.PrintArray(rows, cols, workField);
-            if (!Krai(rows, cols, workField))
+            Renderer.VisualizeBattleField(rows, cols, workField);
+            if (!IsEndOfGame(rows, cols, workField))
             {
                 vremeEIgrachaDaDeistva(n, rows, cols, workField, countPlayed);
             }
@@ -68,21 +68,21 @@ namespace BattleField
             }
         }
 
-        public static bool Krai(int rows, int cols, String[,] Полето)
+        public static bool IsEndOfGame(int rows, int cols, String[,] Полето)
         {
-            bool край = true;
+            bool isEndOfGame = true;
             for (int i = 2; i < rows; i++)
             {
                 for (int j = 2; j < cols; j++)
                 {
                     if (Полето[i, j] == "1" || Полето[i, j] == "2" || Полето[i, j] == "3" || Полето[i, j] == "4" || Полето[i, j] == "5")
                     {
-                        край = false;
+                        isEndOfGame = false;
                         break;
                     }
                 }
             }
-            return край;
+            return isEndOfGame;
         }
     }
 }

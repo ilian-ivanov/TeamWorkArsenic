@@ -1,53 +1,91 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace BattleField
 {
     public static class Renderer
     {
-        public static void NapylniMasiva(int n, int rows, int cols, String[,] workField)
+        public static void PrepareBattleField(int n, int rows, int cols, string[,] field)
         {
-            int count = 0;
+            field[0, 0] = " ";
+            field[0, 1] = " ";
+            field[1, 0] = " ";
+            field[1, 1] = " ";
+
+            for (int row = 2; row < rows; row++)
+            {
+                for (int col = 2; col < cols; col++)
+                {
+                    if (col % 2 == 0)
+                    {
+                        if (col == 2)
+                        {
+                            field[0, col] = "0";
+                        }
+                        else
+                        {
+                            field[0, col] = ((col - 2) / 2).ToString();
+                        }
+                    }
+                    else
+                    {
+                        field[0, col] = " ";
+                    }
+                    if (col < cols - 1)
+                    {
+                        field[1, col] = "-";
+                    }
+
+                    field[row, 0] = (row - 2).ToString();
+                    field[row, 1] = "|";
+                    if (col % 2 == 0)
+                    {
+                        field[row, col] = "-";
+                    }
+                    else
+                    {
+                        field[row, col] = " ";
+                    }
+                }
+            }
+        }
+
+        public static void FillBattleField(int n, int rows, int cols, String[,] workField)
+        {
             Random randomNumber = new Random();
-            int randomPlaceI;
-            int randomPlaceJ;
-            int minPercent = Convert.ToInt32(0.15 * (n * n));
-            int maxPercent = Convert.ToInt32(0.30 * (n * n));
+            int minPercent = (int)(0.15 * (n * n));
+            int maxPercent = (int)(0.30 * (n * n));
             int countMines = randomNumber.Next(minPercent, maxPercent);
+            int count = 0;
 
             while (count <= countMines)
             {
-                randomPlaceI = randomNumber.Next(0, n);
-                randomPlaceJ = randomNumber.Next(0, n);
-                randomPlaceI += 2;
-                randomPlaceJ = 2 * randomPlaceJ + 2;
+                int randomPlaceRow = randomNumber.Next(0, n) + 2;
+                int randomPlaceCol = randomNumber.Next(0, n) * 2 + 2;
 
-                while (workField[randomPlaceI, randomPlaceJ] != " " && workField[randomPlaceI, randomPlaceJ] != "-")
+                do
                 {
-                    randomPlaceI = randomNumber.Next(0, n);
-                    randomPlaceJ = randomNumber.Next(0, n);
-                    randomPlaceI += 2;
-                    randomPlaceJ = 2 * randomPlaceJ + 2;
-                }
+                    randomPlaceRow = randomNumber.Next(0, n) + 2;
+                    randomPlaceCol = randomNumber.Next(0, n) * 2 + 2;
+                } while (workField[randomPlaceRow, randomPlaceCol] != " " &&
+                    workField[randomPlaceRow, randomPlaceCol] != "-");
 
-                String randomDigit = Convert.ToString(randomNumber.Next(1, 6));
-                workField[randomPlaceI, randomPlaceJ] = randomDigit;
-                workField[randomPlaceI, randomPlaceJ + 1] = " ";
+                string randomValueOfCell = randomNumber.Next(1, 6).ToString();
+                workField[randomPlaceRow, randomPlaceCol] = randomValueOfCell;
+                workField[randomPlaceRow, randomPlaceCol + 1] = " ";
                 count++;
             }
         }
 
-        public static void PrintArray(int rows, int cols, String[,] workField)
+        public static void VisualizeBattleField(int rows, int cols, string[,] battleField)
         {
-            for (int i = 0; i < rows; i++)
+            for (int row = 0; row < rows; row++)
             {
-                for (int j = 0; j < cols; j++)
+                for (int col = 0; col < cols; col++)
                 {
-                    Console.Write(workField[i, j]);
-                    Console.WriteLine();
+                    Console.Write(battleField[row, col]);                    
                 }
+                Console.WriteLine();
             }
         }
     }
