@@ -1,20 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace BattleField
 {
     class BattleFieldGame
-    {   static void Main(string[] argumenti)
-        {   Console.Write("Welcome to \"Battle Field game.\" Enter battle field size: n = ");         
-            int n = Convert.ToInt32(Console.ReadLine());
+    {   
+        static void Main(string[] argumenti)
+        {   
+            Console.Write("Welcome to \"Battle Field game.\" Enter battle field size: n = ");         
+            int n = int.Parse(Console.ReadLine());
             while (n < 1 || n > 10)
             {
-
                 Console.WriteLine("Enter a number between 1 and 10!");
-                n = Convert.ToInt32(Console.ReadLine());
-
+                n = int.Parse(Console.ReadLine());
             }
 
             int rows = n + 2;
@@ -29,11 +27,8 @@ namespace BattleField
 
             for (int row = 2; row < rows; row++)
             {
-
                 for (int col = 2; col < cols; col++)
-
-                {
-                    
+                {                    
                     if (col % 2 == 0)
                     {
                         if (col == 2)
@@ -63,20 +58,14 @@ namespace BattleField
                     else
                     {
                         field[row, col] = " ";
-                    }
-                      
+                    }                      
                 }
-
             }
 
             Methods.NapylniMasiva(n, rows, cols, field);
             Methods.PrintArray(rows, cols, field);
             int countPlayed = 0;
-            Methods.vremeEIgrachaDaDeistva(n, rows, cols, field, countPlayed);
-           
-        }
-
-
+            Methods.vremeEIgrachaDaDeistva(n, rows, cols, field, countPlayed);           
         }
     }
-
+}

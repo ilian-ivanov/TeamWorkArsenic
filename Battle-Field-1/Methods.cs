@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace BattleField
 {
     class Methods
     {
-        //tuk e magiqta!!!!
-        //we got the POWER
         public static void NapylniMasiva(int n, int rows, int cols, String[,] workField)
         {
             int count = 0;
@@ -21,7 +17,6 @@ namespace BattleField
 
             while (count <= countMines)
             {
-
                 randomPlaceI = randomNumber.Next(0, n);
                 randomPlaceJ = randomNumber.Next(0, n);
                 randomPlaceI += 2;
@@ -29,12 +24,10 @@ namespace BattleField
 
                 while (workField[randomPlaceI, randomPlaceJ] != " " && workField[randomPlaceI, randomPlaceJ] != "-")
                 {
-
                     randomPlaceI = randomNumber.Next(0, n);
                     randomPlaceJ = randomNumber.Next(0, n);
                     randomPlaceI += 2;
                     randomPlaceJ = 2 * randomPlaceJ + 2;
-
                 }
 
                 String randomDigit = Convert.ToString(randomNumber.Next(1, 6));
@@ -44,21 +37,16 @@ namespace BattleField
             }
         }
 
-
         public static void PrintArray(int rows, int cols, String[,] workField)
         {
-
             for (int i = 0; i < rows; i++)
             {
-
                 for (int j = 0; j < cols; j++)
-
-
+                {
                     Console.Write(workField[i, j]);
-                Console.WriteLine();
-
+                    Console.WriteLine();
+                }
             }
-
         }
 
         public static void vremeEIgrachaDaDeistva(int n, int rows, int cols, String[,] workField, int countPlayed)
@@ -76,7 +64,6 @@ namespace BattleField
                 xy = Console.ReadLine();
                 x = int.Parse(xy.Substring(0, 1));
                 y = int.Parse(xy.Substring(2, 1));
-
             }
 
             x += 2;
@@ -102,9 +89,7 @@ namespace BattleField
 
                 x += 2;
                 y = 2 * y + 2;
-
             }
-
 
             int hitCoordinate = Convert.ToInt32(workField[x, y]);
             switch (hitCoordinate)
@@ -125,9 +110,7 @@ namespace BattleField
             {
                 Console.WriteLine("Game over. Detonated mines: " + countPlayed);
             }
-
         }
-
 
         public static void HitOne(int x, int y, int rows, int cols, String[,] workField)
         {
@@ -148,8 +131,6 @@ namespace BattleField
             {
                 workField[x + 1, y - 2] = "X";
             }
-
-
         }
 
         public static void PrasniDvama(int x, int y, int rows, int cols, String[,] workField)
@@ -172,9 +153,7 @@ namespace BattleField
             {
                 workField[x + 1, y] = "X";
             }
-
         }
-
 
         public static void HitThree(int x, int y, int rows, int cols, String[,] workField)
         {
@@ -267,7 +246,6 @@ namespace BattleField
             }
             else
             {
-
                 if (x - 1 > 1 && y < cols - 3)
                 {
                     workField[x - 1, y + 4] = "X";
@@ -277,9 +255,7 @@ namespace BattleField
                 {
                     workField[x + 1, y + 4] = "X";
                 }
-
             }
-
         }
 
         public static void HitFive(int x, int y, int rows, int cols, String[,] poleZaRabota)
@@ -346,9 +322,6 @@ namespace BattleField
                 }
             }
             return край;
-
         }
-
-
     }
 }
