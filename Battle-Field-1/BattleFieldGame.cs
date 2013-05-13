@@ -62,10 +62,10 @@ namespace BattleField
                 }
             }
 
-            Methods.NapylniMasiva(n, rows, cols, field);
-            Methods.PrintArray(rows, cols, field);
+            Renderer.NapylniMasiva(n, rows, cols, field);
+            Renderer.PrintArray(rows, cols, field);
             int countPlayed = 0;
-            Methods.vremeEIgrachaDaDeistva(n, rows, cols, field, countPlayed);           
+            GameState.vremeEIgrachaDaDeistva(n, rows, cols, field, countPlayed);           
         }
     }
 }
