@@ -5,6 +5,18 @@ namespace BattleField
 {
     public static class Renderer
     {
+        public static int TakeDataForGame()
+        {
+            Console.Write("Welcome to \"Battle Field game.\" Enter battle field size: n = ");
+            int n = int.Parse(Console.ReadLine());
+            while (n < 1 || n > 10)
+            {
+                Console.WriteLine("Enter a number between 1 and 10!");
+                n = int.Parse(Console.ReadLine());
+            }
+            return n;
+        }
+
         public static void PrepareBattleField(int n, int rows, int cols, string[,] field)
         {
             field[0, 0] = " ";
@@ -31,6 +43,7 @@ namespace BattleField
                     {
                         field[0, col] = " ";
                     }
+
                     if (col < cols - 1)
                     {
                         field[1, col] = "-";
