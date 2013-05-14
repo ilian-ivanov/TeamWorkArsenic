@@ -44,8 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BattleFieldGame.cs" />
+    <Compile Include="ConsoleInput.cs" />
     <Compile Include="Explosion.cs" />
-    <Compile Include="GameState.cs" />
+    <Compile Include="Engine.cs" />
     <Compile Include="Renderer.cs" />
   </ItemGroup>
   <ItemGroup>
