@@ -47,7 +47,6 @@
     <Compile Include="ConsoleInput.cs" />
     <Compile Include="Engine.cs" />
     <Compile Include="ExplosionGenerator.cs" />
-    <Compile Include="Explosion.cs" />
     <Compile Include="Engine.cs" />
     <Compile Include="Renderer.cs" />
   </ItemGroup>
