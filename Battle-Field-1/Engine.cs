@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Linq;
 
 namespace BattleField
@@ -9,48 +9,52 @@ namespace BattleField
 
         public static void Run()
         {
-            int sizeOfBattleField = Renderer.TakeDataForGame();
+            int sizeOfBattleField = ConsoleInput.TakeSizeOfBattleField();
             int rows = sizeOfBattleField + GameFieldScaleOffset;
             int cols = sizeOfBattleField * 2 + GameFieldScaleOffset;
-            string[,] field = new string[rows, cols];
+            string[,] battleField = new string[rows, cols];
 
-            Renderer.PrepareBattleField(sizeOfBattleField, rows, cols, field);
-            Renderer.FillBattleField(sizeOfBattleField, rows, cols, field);
-            Renderer.VisualizeBattleField(rows, cols, field);
+            Renderer.PrepareBattleField(rows, cols, battleField);
+            Renderer.FillBattleField(sizeOfBattleField, battleField);
+            Renderer.VisualizeBattleField(rows, cols, battleField);
 
             int score = 0;
             do
             {
                 score++;
-                int x, y;
-                ConsoleInput.ReadPlayerMove(sizeOfBattleField, field, out x, out y);
+                int xCoord;
+                int yCoord;
+                ConsoleInput.ReadPlayerMove(sizeOfBattleField, battleField, out xCoord, out yCoord);
 
-                int hitCoordinate = Convert.ToInt32(field[x, y]);
+                int hitCoordinate = int.Parse(battleField[xCoord, yCoord]);
 
-                ExplosionGenerator explosionGenerator = new ExplosionGenerator(x, y, rows, cols, field);
+                ExplosionGenerator explosionGenerator = new ExplosionGenerator(xCoord, yCoord, rows, cols, battleField);
                 explosionGenerator.Detonate(hitCoordinate);
 
-                Renderer.VisualizeBattleField(rows, cols, field);
+                Renderer.VisualizeBattleField(rows, cols, battleField);
             }
-            while(!IsEndOfGame(rows, cols, field));
+            while(!IsEndOfGame(rows, cols, battleField));
             
             Console.WriteLine("Game over. Detonated mines: " + score);
         }
 
-        private static bool IsEndOfGame(int rows, int cols, String[,] gameField)
+        private static bool IsEndOfGame(int rows, int cols, string[,] battleField)
         {
             bool isEndOfGame = true;
             for (int i = 2; i < rows; i++)
             {
                 for (int j = 2; j < cols; j++)
                 {
-                    if (gameField[i, j] == "1" || gameField[i, j] == "2" || gameField[i, j] == "3" || gameField[i, j] == "4" || gameField[i, j] == "5")
+                    if (battleField[i, j] == "1" || battleField[i, j] == "2" || 
+                        battleField[i, j] == "3" || battleField[i, j] == "4" || 
+                        battleField[i, j] == "5")
                     {
                         isEndOfGame = false;
                         break;
                     }
                 }
             }
+
             return isEndOfGame;
         }
     }
