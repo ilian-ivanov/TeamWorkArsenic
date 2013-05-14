@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace BattleField
 {
-    public static class GameState
+    public static class Engine
     {
         public const int GameFieldScaleOffset = 2;
 

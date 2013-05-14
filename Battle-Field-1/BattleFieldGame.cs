@@ -7,7 +7,7 @@ namespace BattleField
     { 
         static void Main()
         { 
-            GameState.Run();
+            Engine.Run();
         }       
     }
 }

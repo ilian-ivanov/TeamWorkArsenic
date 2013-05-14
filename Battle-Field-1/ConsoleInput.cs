@@ -36,8 +36,8 @@ namespace BattleField
             }
             while (!isCorrectUserMove);
 
-            x = row + GameState.GameFieldScaleOffset;
-            y = col * 2 + GameState.GameFieldScaleOffset;
+            x = row + Engine.GameFieldScaleOffset;
+            y = col * 2 + Engine.GameFieldScaleOffset;
         }
 
         private static bool TryParseValidUserInput(string userInput, out int row, out int col)
@@ -70,8 +70,8 @@ namespace BattleField
 
         private static bool IsPlayerValidMove(string[,] workField, int row, int col)
         {
-            int gameFieldRow = row + GameState.GameFieldScaleOffset;
-            int gameFieldCol = col * 2 + GameState.GameFieldScaleOffset;
+            int gameFieldRow = row + Engine.GameFieldScaleOffset;
+            int gameFieldCol = col * 2 + Engine.GameFieldScaleOffset;
             if (workField[gameFieldRow, gameFieldCol] == "-" ||
                 workField[gameFieldRow, gameFieldCol] == "X")
             {
