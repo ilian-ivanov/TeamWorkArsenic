@@ -73,7 +73,7 @@ namespace BattleField
             int gameFieldRow = row + Engine.GameFieldScaleOffset;
             int gameFieldCol = col * 2 + Engine.GameFieldScaleOffset;
             if (workField[gameFieldRow, gameFieldCol] == "-" ||
-                workField[gameFieldRow, gameFieldCol] == "X")
+                workField[gameFieldRow, gameFieldCol] == ExplosionGenerator.DetonatedCell)
             {
                 return false;
             }

@@ -26,14 +26,9 @@ namespace BattleField
                 ConsoleInput.ReadPlayerMove(sizeOfBattleField, field, out x, out y);
 
                 int hitCoordinate = Convert.ToInt32(field[x, y]);
-                switch (hitCoordinate)
-                {
-                    case 1: Explosion.HitOne(x, y, rows, cols, field); break;
-                    case 2: Explosion.PrasniDvama(x, y, rows, cols, field); break;
-                    case 3: Explosion.HitThree(x, y, rows, cols, field); break;
-                    case 4: Explosion.HitFour(x, y, rows, cols, field); break;
-                    case 5: Explosion.HitFive(x, y, rows, cols, field); break;
-                }
+
+                ExplosionGenerator explosionGenerator = new ExplosionGenerator(x, y, rows, cols, field);
+                explosionGenerator.Detonate(hitCoordinate);
 
                 Renderer.VisualizeBattleField(rows, cols, field);
             }
