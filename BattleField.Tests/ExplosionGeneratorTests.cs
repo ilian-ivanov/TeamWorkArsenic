@@ -18,6 +18,8 @@ namespace BattleField.Tests
                 {"1","-","1","-","-"},
                 {"-","-","-","-","-"},
             };
+            ExplosionGenerator explosionGenerator = new ExplosionGenerator(1, 1, battleField);
+            explosionGenerator.Detonate(MineType.TinyMine);
 
             string[,] expectedBattleField = new string[5, 5]
             {
