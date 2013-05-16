@@ -90,7 +90,7 @@ namespace BattleField
             return false;
         }
 
-        private static bool IsPlayerValidMove(string[,] battleField, int row, int col)
+        internal static bool IsPlayerValidMove(string[,] battleField, int row, int col)
         {
             int gameFieldRow = row;
             int gameFieldCol = col;
@@ -105,7 +105,7 @@ namespace BattleField
             return true;
         }
 
-        private static bool IsInputValidCoordinate(int battleFieldSize, int row, int col)
+        internal static bool IsInputValidCoordinate(int battleFieldSize, int row, int col)
         {
             if ((row < 0 || row > (battleFieldSize - 1)) && (col < 0 || col > (battleFieldSize - 1)))
             {
