@@ -42,7 +42,7 @@ namespace BattleField
             }
         }
 
-        public static void VisualizeBattleField(int rows, int cols, string[,] battleField)
+        public static void RenderBattleField(int rows, int cols, string[,] battleField)
         {
             Console.Write(" ");
             for (int i = 0; i < cols; i++)

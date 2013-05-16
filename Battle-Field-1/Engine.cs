@@ -14,7 +14,7 @@ namespace BattleField
 
             Renderer.PrepareBattleField(rows, cols, battleField);
             Renderer.FillBattleField(sizeOfBattleField, battleField);
-            Renderer.VisualizeBattleField(rows, cols, battleField);
+            Renderer.RenderBattleField(rows, cols, battleField);
 
             int score = 0;
             do
@@ -29,7 +29,7 @@ namespace BattleField
                 ExplosionGenerator explosionGenerator = new ExplosionGenerator(xCoord, yCoord, rows, cols, battleField);
                 explosionGenerator.Detonate((MineType)hitCoordinate);
 
-                Renderer.VisualizeBattleField(rows, cols, battleField);
+                Renderer.RenderBattleField(rows, cols, battleField);
             }
             while(!IsEndOfGame(rows, cols, battleField));
             
