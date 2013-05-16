@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace BattleField
 {
-    class ConsoleInput
+    public class ConsoleInput
     {
         public static int TakeSizeOfBattleField()
         {
