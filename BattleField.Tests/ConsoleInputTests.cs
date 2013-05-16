@@ -35,6 +35,7 @@ namespace BattleField.Tests
             Console.SetIn(new StringReader("0")); //wrong input
             Console.SetIn(new StringReader("1")); //correct input
             var expected = 1;
+
             int actual = ConsoleInput.TakeSizeOfBattleField();
 
             Assert.AreEqual(expected, actual);
@@ -46,6 +47,7 @@ namespace BattleField.Tests
             Console.SetIn(new StringReader("11")); //wrong input
             Console.SetIn(new StringReader("10")); //correct input
             var expected = 10;
+
             int actual = ConsoleInput.TakeSizeOfBattleField();
 
             Assert.AreEqual(expected, actual);

@@ -95,7 +95,6 @@ namespace BattleField
             int gameFieldRow = row;
             int gameFieldCol = col;
 
-            // TODO: index out of range if we make field with size 3 and give coordinates 0 3
             if (battleField[gameFieldRow, gameFieldCol] == "-" ||
                 battleField[gameFieldRow, gameFieldCol] == ExplosionGenerator.DetonatedCell)
             {
