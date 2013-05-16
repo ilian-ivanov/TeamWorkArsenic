@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using BattleField;
 
 namespace BattleField.Tests
 {
@@ -7,23 +8,35 @@ namespace BattleField.Tests
     public class ConsoleInputTests
     {
         [TestMethod]
-        public void TakeSizeOfBattleFiel_ValidTest1()
+        public void TakeSizeOfBattleFiel_IsEndOfGameFalse()
         {
-            //ConsoleInput target = new ConsoleInput();
-            //PrivateObject obj = new PrivateObject(target);
-            //var retVal = obj.Invoke("PrivateMethod");
-            //int size = 5;
-            //Assert.AreEqual(size, retVal);
+            ConsoleInput target = new ConsoleInput();
+            PrivateObject obj = new PrivateObject(target);
+            string[,] field = new string[,] 
+            {
+                {"X","-","-"},
+                {"X","X","-"},
+                {"-","-","1"}
+            };
+            var expected = obj.Invoke("IsEndOfGame", new object[] { field });
+            var actual = false;
+            Assert.AreEqual(expected, actual);
         }
 
-        //[TestMethod]
-        public void TakeSizeOfBattleFiel_ValidTestWithOne()
+        [TestMethod]
+        public void TakeSizeOfBattleFiel_IsEndOfGameTrue()
         {
-            //ConsoleInput target = new ConsoleInput();
-            //PrivateObject obj = new PrivateObject(target);
-            //var observed = obj.Invoke("PrivateMethod");
-            //const int expected = 1;
-            //Assert.AreEqual(expected, observed);
+            ConsoleInput target = new ConsoleInput();
+            PrivateObject obj = new PrivateObject(target);
+            string[,] field = new string[,] 
+            {
+                {"X","-","-"},
+                {"X","X","-"},
+                {"-","-","X"}
+            };
+            var expected = obj.Invoke("IsEndOfGame", new object[] { field });
+            var actual = false;
+            Assert.AreEqual(expected, actual);
         }
 
         public void TakeSizeOfBattleFiel_ValidTestWithTen()
