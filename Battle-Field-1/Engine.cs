@@ -41,9 +41,9 @@ namespace BattleField
         private static bool IsEndOfGame(int rows, int cols, string[,] battleField)
         {
             bool isEndOfGame = true;
-            for (int i = 2; i < rows; i++)
+            for (int i = GameFieldScaleOffset; i < rows; i++)
             {
-                for (int j = 2; j < cols; j++)
+                for (int j = GameFieldScaleOffset; j < cols; j++)
                 {
                     if (battleField[i, j] == "1" || battleField[i, j] == "2" || 
                         battleField[i, j] == "3" || battleField[i, j] == "4" || 
