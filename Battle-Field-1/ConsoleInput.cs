@@ -57,8 +57,8 @@ namespace BattleField
             }
             while (!isCorrectUserMove);
 
-            xCoord = row + Engine.GameFieldScaleOffset;
-            yCoord = col * 2 + Engine.GameFieldScaleOffset;
+            xCoord = row;
+            yCoord = col;
         }
 
         private static bool TryParseValidUserInput(string userInput, out int row, out int col)
@@ -91,8 +91,8 @@ namespace BattleField
 
         private static bool IsPlayerValidMove(string[,] battleField, int row, int col)
         {
-            int gameFieldRow = row + Engine.GameFieldScaleOffset;
-            int gameFieldCol = col * 2 + Engine.GameFieldScaleOffset;
+            int gameFieldRow = row;
+            int gameFieldCol = col;
 
             // TODO: index out of range if we make field with size 3 and give coordinates 0 3
             if (battleField[gameFieldRow, gameFieldCol] == "-" ||

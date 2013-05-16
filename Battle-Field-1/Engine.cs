@@ -5,13 +5,11 @@ namespace BattleField
 {
     public static class Engine
     {
-        public const int GameFieldScaleOffset = 2;
-
         public static void Run()
         {
             int sizeOfBattleField = ConsoleInput.TakeSizeOfBattleField();
-            int rows = sizeOfBattleField + GameFieldScaleOffset;
-            int cols = sizeOfBattleField * 2 + GameFieldScaleOffset;
+            int rows = sizeOfBattleField;
+            int cols = sizeOfBattleField;
             string[,] battleField = new string[rows, cols];
 
             Renderer.PrepareBattleField(rows, cols, battleField);

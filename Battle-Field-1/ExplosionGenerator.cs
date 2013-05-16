@@ -30,203 +30,216 @@ namespace BattleField
                 case 3: this.DetonateMediumMine(); break;
                 case 4: this.DetonateBigMine(); break;
                 case 5: this.DetonateHugeMine(); break;
-                    //TODO: Throw exception when default
+                //TODO: Throw exception when default
             }
         }
 
         private void DetonateTinyMine()
         {
-            workField[x, y] = ExplosionGenerator.DetonatedCell;
-            if (x - 1 > 1 && y - 2 > 1)
+            // The current cell.
+            if (this.IsCellInTheGameField(this.x, this.y))
             {
-                workField[x - 1, y - 2] = ExplosionGenerator.DetonatedCell;
+                this.DetonateCell(this.x, this.y);
             }
-            if (x - 1 > 1 && y < cols - 2)
+
+            // The top left cell.
+            if (this.IsCellInTheGameField(this.x - 1, this.y - 1))
             {
-                workField[x - 1, y + 2] = ExplosionGenerator.DetonatedCell;
+                this.DetonateCell(this.x - 1, this.y - 1);
             }
-            if (x < rows - 1 && y < cols - 2)
+
+            // Top right cell.
+            if (this.IsCellInTheGameField(this.x - 1, this.y + 1))
             {
-                workField[x + 1, y + 2] = ExplosionGenerator.DetonatedCell;
+                this.DetonateCell(this.x - 1, this.y + 1);
             }
-            if (x < rows - 1 && y - 2 > 1)
+
+            // Bottom left cell.
+            if (this.IsCellInTheGameField(this.x + 1, this.y - 1))
             {
-                workField[x + 1, y - 2] = ExplosionGenerator.DetonatedCell;
+                this.DetonateCell(this.x + 1, this.y - 1);
+            }
+
+            // Bottom right cell.
+            if (this.IsCellInTheGameField(this.x + 1, this.y + 1))
+            {
+                this.DetonateCell(this.x + 1, this.y + 1);
             }
         }
 
         private void DetonateSmallMine()
         {
-            workField[x, y] = ExplosionGenerator.DetonatedCell;
-            DetonateTinyMine();
-            if (y - 2 > 1)
+            this.DetonateTinyMine();
+
+            // Top cell.
+            if (this.IsCellInTheGameField(this.x - 1, this.y))
             {
-                workField[x, y - 2] = ExplosionGenerator.DetonatedCell;
+                this.DetonateCell(this.x - 1, this.y);
             }
-            if (y < cols - 2)
+
+            // Right cell.
+            if (this.IsCellInTheGameField(this.x, this.y + 1))
             {
-                workField[x, y + 2] = ExplosionGenerator.DetonatedCell;
+                this.DetonateCell(this.x, this.y + 1);
             }
-            if (x - 1 > 1)
+
+            // Bottom cell.
+            if (this.IsCellInTheGameField(this.x + 1, this.y))
             {
-                workField[x - 1, y] = ExplosionGenerator.DetonatedCell;
+                this.DetonateCell(this.x + 1, this.y);
             }
-            if (x < rows - 1)
+
+            // Left cell.
+            if (this.IsCellInTheGameField(this.x, this.y - 1))
             {
-                workField[x + 1, y] = ExplosionGenerator.DetonatedCell;
+                this.DetonateCell(this.x, this.y - 1);
             }
         }
 
         private void DetonateMediumMine()
         {
-            DetonateSmallMine();
-            if (x - 2 > 1)
-            {
-                workField[x - 2, y] = ExplosionGenerator.DetonatedCell;
-            }
-            if (x < rows - 2)
-            {
-                workField[x + 2, y] = ExplosionGenerator.DetonatedCell;
-            }
-            if (y - 4 > 1)
-            {
-                workField[x, y - 4] = ExplosionGenerator.DetonatedCell;
-            }
-            if (y == 18)
-            {
-                workField[x, y + 2] = ExplosionGenerator.DetonatedCell;
+            this.DetonateSmallMine();
 
-            }
-            else if (y == 20)
+            // Top of the small mine.
+            if (this.IsCellInTheGameField(this.x - 2, this.y))
             {
-                workField[x, y] = ExplosionGenerator.DetonatedCell;
+                this.DetonateCell(this.x - 2, this.y);
             }
-            else
+
+            // Right of the small mine.
+            if (this.IsCellInTheGameField(this.x, this.y + 2))
             {
-                if (y < cols - 3)
-                {
-                    workField[x, y + 4] = ExplosionGenerator.DetonatedCell;
-                }
+                this.DetonateCell(this.x, this.y + 2);
+            }
+
+            // Bottom of the small mine.
+            if (this.IsCellInTheGameField(this.x + 2, this.y))
+            {
+                this.DetonateCell(this.x + 2, this.y);
+            }
+
+            // Left of the small mine.
+            if (this.IsCellInTheGameField(this.x, this.y - 2))
+            {
+                this.DetonateCell(this.x, this.y - 2);
             }
         }
 
         private void DetonateBigMine()
         {
-            DetonateMediumMine();
-            if (x - 2 > 1 && y - 2 > 1)
+            this.DetonateMediumMine();
+
+            // Top left of the medium mine.
+            if (this.IsCellInTheGameField(this.x - 2, this.y - 1))
             {
-                workField[x - 2, y - 2] = ExplosionGenerator.DetonatedCell;
-            }
-            if (x - 1 > 1 && y - 4 > 1)
-            {
-                workField[x - 1, y - 4] = ExplosionGenerator.DetonatedCell;
-            }
-            if (x - 2 > 1 && y < cols - 2)
-            {
-                workField[x - 2, y + 2] = ExplosionGenerator.DetonatedCell;
+                this.DetonateCell(this.x - 2, this.y - 1);
             }
 
-
-            if (x < rows - 1 && y - 4 > 1)
+            // Top right of the medium mine.
+            if (this.IsCellInTheGameField(this.x - 2, this.y + 1))
             {
-                workField[x + 1, y - 4] = ExplosionGenerator.DetonatedCell;
-            }
-            if (x < rows - 2 && y - 2 > 1)
-            {
-                workField[x + 2, y - 2] = ExplosionGenerator.DetonatedCell;
+                this.DetonateCell(this.x - 2, this.y + 1);
             }
 
-            if (x < rows - 2 && y < cols - 2)
+            // Right top of the medium mine.
+            if (this.IsCellInTheGameField(this.x - 1, this.y + 2))
             {
-                workField[x + 2, y + 2] = ExplosionGenerator.DetonatedCell;
+                this.DetonateCell(this.x - 1, this.y + 2);
             }
 
-            if (y == 18)
+            // Right bottom of the medium mine.
+            if (this.IsCellInTheGameField(this.x + 1, this.y + 2))
             {
-                if (x - 1 > 1)
-                {
-                    workField[x - 1, y + 2] = ExplosionGenerator.DetonatedCell;
-                }
-
-                if (x < rows - 1)
-                {
-                    workField[x + 1, y + 2] = ExplosionGenerator.DetonatedCell;
-                }
+                this.DetonateCell(this.x + 1, this.y + 2);
             }
 
-            else if (y == 20)
+            // Bottom right of the medium mine.
+            if (this.IsCellInTheGameField(this.x + 2, this.y + 1))
             {
-                if (x - 1 > 1)
-                {
-                    workField[x - 1, y] = ExplosionGenerator.DetonatedCell;
-                }
-
-                if (x < rows - 1)
-                {
-                    workField[x + 1, y] = ExplosionGenerator.DetonatedCell;
-                }
+                this.DetonateCell(this.x + 2, this.y + 1);
             }
-            else
-            {
-                if (x - 1 > 1 && y < cols - 3)
-                {
-                    workField[x - 1, y + 4] = ExplosionGenerator.DetonatedCell;
-                }
 
-                if (x < rows - 1 && y < cols - 3)
-                {
-                    workField[x + 1, y + 4] = ExplosionGenerator.DetonatedCell;
-                }
+            // Bottom left of the medium mine.
+            if (this.IsCellInTheGameField(this.x + 2, this.y - 1))
+            {
+                this.DetonateCell(this.x + 2, this.y - 1);
+            }
+
+            // Left bottom of the medium mine.
+            if (this.IsCellInTheGameField(this.x + 1, this.y - 2))
+            {
+                this.DetonateCell(this.x + 1, this.y - 2);
+            }
+
+            // Left top of the medium mine.
+            if (this.IsCellInTheGameField(this.x - 1, this.y - 2))
+            {
+                this.DetonateCell(this.x - 1, this.y - 2);
             }
         }
 
         private void DetonateHugeMine()
         {
-            DetonateBigMine();
-            if (x - 2 > 1 && y - 4 > 1)
+            this.DetonateBigMine();
+
+            // Top left of the big mine.
+            if (this.IsCellInTheGameField(this.x - 2, this.y - 2))
             {
-                workField[x - 2, y - 4] = ExplosionGenerator.DetonatedCell;
+                this.DetonateCell(this.x - 2, this.y - 2);
             }
 
-            if (x < rows - 2 && y - 4 > 1)
+            // Top right of the big mine.
+            if (this.IsCellInTheGameField(this.x - 2, this.y + 2))
             {
-                workField[x + 2, y - 4] = ExplosionGenerator.DetonatedCell;
+                this.DetonateCell(this.x - 2, this.y + 2);
             }
 
-            if (y == 18)
+            // Bottom left of the big mine.
+            if (this.IsCellInTheGameField(this.x + 2, this.y - 2))
             {
-                if (x < rows - 2)
-                {
-                    workField[x + 2, y + 2] = ExplosionGenerator.DetonatedCell;
-                }
-                if (x - 2 > 1)
-                {
-                    workField[x - 2, y + 2] = ExplosionGenerator.DetonatedCell;
-                }
+                this.DetonateCell(this.x + 2, this.y - 2);
             }
-            else if (y == 20)
-            {
-                if (x < rows - 2)
-                {
-                    workField[x + 2, y] = ExplosionGenerator.DetonatedCell;
-                }
-                if (x - 2 > 1)
-                {
-                    workField[x - 2, y] = ExplosionGenerator.DetonatedCell;
-                }
 
-            }
-            else
+            // Bottom right of the big mine.
+            if (this.IsCellInTheGameField(this.x + 2, this.y + 2))
             {
-                if (x < rows - 2 && y < cols - 3)
-                {
-                    workField[x + 2, y + 4] = ExplosionGenerator.DetonatedCell;
-                }
-                if (x - 2 > 1 && y < cols - 3)
-                {
-                    workField[x - 2, y + 4] = ExplosionGenerator.DetonatedCell;
-                }
+                this.DetonateCell(this.x + 2, this.y + 2);
             }
+        }
+
+        private bool IsCellInTheGameField(int row, int col)
+        {
+            if (row < 0)
+            {
+                return false;
+            }
+
+            if (row >= this.rows)
+            {
+                return false;
+            }
+
+            if (col < 0)
+            {
+                return false;
+            }
+
+            if (col >= this.cols)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private void DetonateCell(int row, int col)
+        {
+            if (this.IsCellInTheGameField(row, col) == false)
+            {
+                throw new InvalidOperationException("The coordinates are out of the fields!");
+            }
+
+            this.workField[row, col] = ExplosionGenerator.DetonatedCell;
         }
     }
 }
