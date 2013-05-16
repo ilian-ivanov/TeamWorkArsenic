@@ -19,6 +19,12 @@ namespace BattleField
 
         public void Detonate(MineType mineSize)
         {
+            string mineIndex = ((int)mineSize).ToString();
+            if (this.workField[this.x, this.y] != mineIndex)
+            {
+                throw new InvalidOperationException("The current mine type is different from the selected one");
+            }
+
             switch (mineSize)
             {
                 case MineType.TinyMine:
