@@ -47,6 +47,7 @@
     <Compile Include="ConsoleInput.cs" />
     <Compile Include="Engine.cs" />
     <Compile Include="ExplosionGenerator.cs" />
+    <Compile Include="MineType.cs" />
     <Compile Include="Renderer.cs" />
   </ItemGroup>
   <ItemGroup>

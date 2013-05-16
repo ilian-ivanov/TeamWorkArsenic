@@ -21,16 +21,27 @@ namespace BattleField
             this.workField = workField;
         }
 
-        public void Detonate(int mineSize)
+        public void Detonate(MineType mineSize)
         {
             switch (mineSize)
             {
-                case 1: this.DetonateTinyMine(); break;
-                case 2: this.DetonateSmallMine(); break;
-                case 3: this.DetonateMediumMine(); break;
-                case 4: this.DetonateBigMine(); break;
-                case 5: this.DetonateHugeMine(); break;
-                //TODO: Throw exception when default
+                case MineType.TinyMine: 
+                    this.DetonateTinyMine();
+                    break;
+                case MineType.SmallMine: 
+                    this.DetonateSmallMine();
+                    break;
+                case MineType.MediumMine: 
+                    this.DetonateMediumMine(); 
+                    break;
+                case MineType.BigMine: 
+                    this.DetonateBigMine();
+                    break;
+                case MineType.HugeMine: 
+                    this.DetonateHugeMine();
+                    break;
+                default: 
+                    throw new ArgumentException("Unknown mine type.");
             }
         }
 

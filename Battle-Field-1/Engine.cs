@@ -27,7 +27,7 @@ namespace BattleField
                 int hitCoordinate = int.Parse(battleField[xCoord, yCoord]);
 
                 ExplosionGenerator explosionGenerator = new ExplosionGenerator(xCoord, yCoord, rows, cols, battleField);
-                explosionGenerator.Detonate(hitCoordinate);
+                explosionGenerator.Detonate((MineType)hitCoordinate);
 
                 Renderer.VisualizeBattleField(rows, cols, battleField);
             }
