@@ -26,27 +26,28 @@ namespace BattleField
             return size;
         }
 
-        public static void ReadPlayerMove(int sizeOfBattleField, string[,] battleField, out int xCoord, out int yCoord)
+        public static void ReadPlayerMove(string[,] battleField, out int xCoord, out int yCoord)
         {
+            int sizeOfBattleField = battleField.GetLength(0);
             bool isCorrectUserMove = false;
-            int row;
-            int col;
+            int x;
+            int y;
 
             do
             {
                 Console.WriteLine("Please enter coordinates: ");
                 string userInput = Console.ReadLine();
 
-                bool isValidUserInput = TryParseValidUserInput(userInput, out row, out col);
-                bool areCoordinates = IsInputValidCoordinate(sizeOfBattleField, row, col);
-                bool isValidMove = false; 
+                bool isValidUserInput = TryParseValidUserInput(userInput, out x, out y);
+                bool areCoordinates = IsInputValidCoordinate(sizeOfBattleField, x, y);
+                bool isValidMove = false;
 
                 if (isValidUserInput && areCoordinates)
                 {
-                    isValidMove = IsPlayerValidMove(battleField, row, col);
+                    isValidMove = IsPlayerValidMove(battleField, x, y);
                 }
 
-                if(isValidUserInput && areCoordinates && isValidMove)
+                if (isValidUserInput && areCoordinates && isValidMove)
                 {
                     isCorrectUserMove = true;
                 }
@@ -57,8 +58,8 @@ namespace BattleField
             }
             while (!isCorrectUserMove);
 
-            xCoord = row;
-            yCoord = col;
+            xCoord = x;
+            yCoord = y;
         }
 
         private static bool TryParseValidUserInput(string userInput, out int row, out int col)

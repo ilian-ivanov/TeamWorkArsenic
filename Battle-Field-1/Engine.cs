@@ -8,13 +8,11 @@ namespace BattleField
         public static void Run()
         {
             int sizeOfBattleField = ConsoleInput.TakeSizeOfBattleField();
-            int rows = sizeOfBattleField;
-            int cols = sizeOfBattleField;
-            string[,] battleField = new string[rows, cols];
+            string[,] battleField = new string[sizeOfBattleField, sizeOfBattleField];
 
-            Renderer.PrepareBattleField(rows, cols, battleField);
-            Renderer.FillBattleField(sizeOfBattleField, battleField);
-            Renderer.RenderBattleField(rows, cols, battleField);
+            Renderer.PrepareBattleField(battleField);
+            Renderer.FillBattleField(battleField);
+            Renderer.VisualizeBattleField(battleField);
 
             int score = 0;
             do
@@ -22,29 +20,28 @@ namespace BattleField
                 score++;
                 int xCoord;
                 int yCoord;
-                ConsoleInput.ReadPlayerMove(sizeOfBattleField, battleField, out xCoord, out yCoord);
+                ConsoleInput.ReadPlayerMove(battleField, out xCoord, out yCoord);
 
+                ExplosionGenerator explosionGenerator = new ExplosionGenerator(xCoord, yCoord, battleField);
                 int hitCoordinate = int.Parse(battleField[xCoord, yCoord]);
-
-                ExplosionGenerator explosionGenerator = new ExplosionGenerator(xCoord, yCoord, rows, cols, battleField);
                 explosionGenerator.Detonate((MineType)hitCoordinate);
 
-                Renderer.RenderBattleField(rows, cols, battleField);
+                Renderer.VisualizeBattleField(battleField);
             }
-            while(!IsEndOfGame(rows, cols, battleField));
-            
+            while (!IsEndOfGame(battleField));
+
             Console.WriteLine("Game over. Detonated mines: " + score);
         }
 
-        private static bool IsEndOfGame(int rows, int cols, string[,] battleField)
+        private static bool IsEndOfGame(string[,] battleField)
         {
             bool isEndOfGame = true;
-            for (int i = 0; i < rows; i++)
+            for (int i = 0; i < battleField.GetLength(0); i++)
             {
-                for (int j = 0; j < cols; j++)
+                for (int j = 0; j < battleField.GetLength(1); j++)
                 {
-                    if (battleField[i, j] == "1" || battleField[i, j] == "2" || 
-                        battleField[i, j] == "3" || battleField[i, j] == "4" || 
+                    if (battleField[i, j] == "1" || battleField[i, j] == "2" ||
+                        battleField[i, j] == "3" || battleField[i, j] == "4" ||
                         battleField[i, j] == "5")
                     {
                         isEndOfGame = false;

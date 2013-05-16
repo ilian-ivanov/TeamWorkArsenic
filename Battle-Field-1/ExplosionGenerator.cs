@@ -8,16 +8,12 @@ namespace BattleField
         public const string DetonatedCell = "X";
         private int x;
         private int y;
-        private int rows;
-        private int cols;
         private String[,] workField;
 
-        public ExplosionGenerator(int x, int y, int rows, int cols, String[,] workField)
+        public ExplosionGenerator(int x, int y, String[,] workField)
         {
             this.x = x;
             this.y = y;
-            this.rows = rows;
-            this.cols = cols;
             this.workField = workField;
         }
 
@@ -25,22 +21,22 @@ namespace BattleField
         {
             switch (mineSize)
             {
-                case MineType.TinyMine: 
+                case MineType.TinyMine:
                     this.DetonateTinyMine();
                     break;
-                case MineType.SmallMine: 
+                case MineType.SmallMine:
                     this.DetonateSmallMine();
                     break;
-                case MineType.MediumMine: 
-                    this.DetonateMediumMine(); 
+                case MineType.MediumMine:
+                    this.DetonateMediumMine();
                     break;
-                case MineType.BigMine: 
+                case MineType.BigMine:
                     this.DetonateBigMine();
                     break;
-                case MineType.HugeMine: 
+                case MineType.HugeMine:
                     this.DetonateHugeMine();
                     break;
-                default: 
+                default:
                     throw new ArgumentException("Unknown mine type.");
             }
         }
@@ -225,7 +221,7 @@ namespace BattleField
                 return false;
             }
 
-            if (row >= this.rows)
+            if (row >= this.workField.GetLength(0))
             {
                 return false;
             }
@@ -235,7 +231,7 @@ namespace BattleField
                 return false;
             }
 
-            if (col >= this.cols)
+            if (col >= this.workField.GetLength(1))
             {
                 return false;
             }
