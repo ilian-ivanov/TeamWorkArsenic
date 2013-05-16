@@ -72,7 +72,7 @@ namespace BattleField
                 isValidRow = int.TryParse(rowCol.Substring(0, 1), out row);
                 isValidCol = int.TryParse(rowCol.Substring(2, 1), out col);
             }
-            catch (ArgumentOutOfRangeException aore)
+            catch
             {
                 // we dont care why the input is not parsed
                 // that's why no specific exception is catched
@@ -90,7 +90,7 @@ namespace BattleField
             return false;
         }
 
-        internal static bool IsPlayerValidMove(string[,] battleField, int row, int col)
+        private static bool IsPlayerValidMove(string[,] battleField, int row, int col)
         {
             int gameFieldRow = row;
             int gameFieldCol = col;
@@ -105,14 +105,14 @@ namespace BattleField
             return true;
         }
 
-        internal static bool IsInputValidCoordinate(int battleFieldSize, int row, int col)
+        private static bool IsInputValidCoordinate(int battleFieldSize, int row, int col)
         {
-            if ((row < 0 || row > (battleFieldSize - 1)) && (col < 0 || col > (battleFieldSize - 1)))
+            if ((row >= 0 && row < battleFieldSize) && (col >= 0 && col < battleFieldSize))
             {
-                return false;
+                return true;
             }
 
-            return true;
+            return false;
         }
     }
 }

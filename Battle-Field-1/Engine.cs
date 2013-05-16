@@ -33,7 +33,7 @@ namespace BattleField
             Console.WriteLine("Game over. Detonated mines: " + score);
         }
 
-        public static bool IsEndOfGame(string[,] battleField)
+        private static bool IsEndOfGame(string[,] battleField)
         {
             bool isEndOfGame = true;
             for (int i = 0; i < battleField.GetLength(0); i++)
