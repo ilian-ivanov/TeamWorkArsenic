@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 
 namespace BattleField
 {
@@ -8,19 +7,19 @@ namespace BattleField
         public const string DetonatedCell = "X";
         private int x;
         private int y;
-        private String[,] workField;
+        private readonly string[,] battleField;
 
-        public ExplosionGenerator(int x, int y, String[,] workField)
+        public ExplosionGenerator(int x, int y, string[,] battleField)
         {
             this.x = x;
             this.y = y;
-            this.workField = workField;
+            this.battleField = battleField;
         }
 
         public void Detonate(MineType mineSize)
         {
             string mineIndex = ((int)mineSize).ToString();
-            if (this.workField[this.x, this.y] != mineIndex)
+            if (this.battleField[this.x, this.y] != mineIndex)
             {
                 throw new InvalidOperationException("The current mine type is different from the selected one");
             }
@@ -227,7 +226,7 @@ namespace BattleField
                 return false;
             }
 
-            if (row >= this.workField.GetLength(0))
+            if (row >= this.battleField.GetLength(0))
             {
                 return false;
             }
@@ -237,7 +236,7 @@ namespace BattleField
                 return false;
             }
 
-            if (col >= this.workField.GetLength(1))
+            if (col >= this.battleField.GetLength(1))
             {
                 return false;
             }
@@ -252,7 +251,7 @@ namespace BattleField
                 throw new InvalidOperationException("The coordinates are out of the fields!");
             }
 
-            this.workField[row, col] = ExplosionGenerator.DetonatedCell;
+            this.battleField[row, col] = ExplosionGenerator.DetonatedCell;
         }
     }
 }

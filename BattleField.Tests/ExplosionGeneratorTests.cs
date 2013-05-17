@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BattleField.Tests
@@ -106,6 +105,26 @@ namespace BattleField.Tests
         {
             ExplosionGenerator explosionGenerator = new ExplosionGenerator(5, 0, this.battleField);
             explosionGenerator.Detonate(MineType.MediumMine);
+        }
+
+        [TestMethod]
+        public void TestDetonate_WithBigMine()
+        {
+            ExplosionGenerator explosionGenerator = new ExplosionGenerator(2, 4, this.battleField);
+            explosionGenerator.Detonate(MineType.BigMine);
+
+            string[,] expectedBattleField = new string[7, 7]
+            {
+                {"-","-","-","X","X","X","-"},
+                {"-","1","X","X","X","X","X"},
+                {"-","-","X","X","X","X","X"},
+                {"1","-","X","X","X","X","X"},
+                {"-","-","5","X","X","X","-"},
+                {"-","-","-","-","-","2","-"},
+                {"-","-","-","-","-","-","-"},
+            };
+
+            AssertBattleFields(expectedBattleField, battleField);
         }
 
         [TestMethod]
